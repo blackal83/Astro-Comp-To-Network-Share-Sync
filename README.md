@@ -1,4 +1,4 @@
-# Astrophoto Automated NAS Offloader (`Watch-ImageSequences`)
+# Astrophoto Automated NAS/Network Share Offloader (`Watch-ImageSequences`)
 
 A lightweight, zero-dependency Windows PowerShell background watcher that monitors your local imaging directory, copies completed frames to a network share (NAS), verifies every transfer via **SHA-256 checksums**, safely removes local copies to free up observatory mini-PC storage, and quarantines filename collisions without ever overwriting data.
 
