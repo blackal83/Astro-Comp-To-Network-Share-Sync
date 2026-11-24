@@ -1,10 +1,10 @@
-# Watch-NinaSequences.ps1
+# Watch-ImageSequences.ps1
 # Watches N.I.N.A. sequences folder, verifies SHA-256 copy to V:\, deletes local on match,
 # and quarantines filename collisions to sequences_conflicts.
 
-$SourceRoot   = "C:\Users\PrimaLuceLab\Documents\N.I.N.A\sequences"
-$DestRoot     = "\\192.168.4.75\Astrophotography"
-$ConflictRoot = "C:\Users\PrimaLuceLab\Documents\N.I.N.A\sequences_conflicts"
+$SourceRoot   = "C:\Users\<YourUsername>\Documents\N.I.N.A\sequences"
+$DestRoot     = "\\<your network ip or share name>\Astrophotography"
+$ConflictRoot = "C:\Users\<YourUsername>\Documents\N.I.N.A\sequences_conflicts"
 $LogDir       = "C:\Scripts\ImageOffloader\logs"
 
 # Extensions N.I.N.A. outputs (ignores .tmp or incomplete scratch files)
@@ -98,7 +98,7 @@ function Process-AstroFile {
         }
     }
 
-    # Ensure V:\ is reachable before doing anything
+    # Ensure $DestRoot is reachable before doing anything
     if (-not (Test-Path -LiteralPath "$DestRoot\")) {
         Write-Log "Destination $DestRoot is offline/unreachable. Leaving file locally: $FullPath" "WARN"
         return
@@ -229,5 +229,5 @@ try {
 }
 finally {
     $watcher.Dispose()
-    Write-Log "=== NinaOffloader stopped ==="
+    Write-Log "=== ImageOffloader stopped ==="
 }
