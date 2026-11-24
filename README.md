@@ -1,6 +1,6 @@
-# N.I.N.A. Automated NAS Offloader (`Watch-NinaSequences`)
+# Astrophoto Automated NAS Offloader (`Watch-ImageSequences`)
 
-A lightweight, zero-dependency Windows PowerShell background watcher that monitors your local [N.I.N.A.](https://nighttime-imaging.eu/) imaging directory, copies completed frames to a network share (NAS), verifies every transfer via **SHA-256 checksums**, safely removes local copies to free up observatory mini-PC storage, and quarantines filename collisions without ever overwriting data.
+A lightweight, zero-dependency Windows PowerShell background watcher that monitors your local imaging directory, copies completed frames to a network share (NAS), verifies every transfer via **SHA-256 checksums**, safely removes local copies to free up observatory mini-PC storage, and quarantines filename collisions without ever overwriting data.
 
 Designed for headless observatory computers (such as PrimaLuceLab EAGLE, MeLE Quieter, or Intel NUC rigs) running Windows 10/11.
 
@@ -8,8 +8,8 @@ Designed for headless observatory computers (such as PrimaLuceLab EAGLE, MeLE Qu
 
 ## Key Features
 
-* **Real-Time & Scheduled Sweeps:** Uses `System.IO.FileSystemWatcher` for near-instant offloading as N.I.N.A. saves frames, backed by a periodic full-directory sweep to catch any files written during brief network dropouts.
-* **Write-Lock & Stability Verification:** Waits for file sizes to stabilize and confirms N.I.N.A. has released its exclusive file lock before touching any `.fits`, `.fit`, `.xisf`, `.tif`, or `.tiff` file (ignoring temporary/incomplete scratch files).
+* **Real-Time & Scheduled Sweeps:** Uses `System.IO.FileSystemWatcher` for near-instant offloading as your software saves frames, backed by a periodic full-directory sweep to catch any files written during brief network dropouts.
+* **Write-Lock & Stability Verification:** Waits for file sizes to stabilize and confirms your software has released its exclusive file lock before touching any `.fits`, `.fit`, `.xisf`, `.tif`, or `.tiff` file (ignoring temporary/incomplete scratch files).
 * **Cryptographic SHA-256 Verification:** Computes the SHA-256 hash of the local source file and the copied NAS file. Local files are **only** deleted if both hashes match byte-for-byte.
 * **Smart Collision Handling:**
   * **Identical Hash:** If a file with the same relative path already exists on the NAS and has an identical SHA-256 hash, the redundant local copy is safely cleaned up.
@@ -26,7 +26,7 @@ Designed for headless observatory computers (such as PrimaLuceLab EAGLE, MeLE Qu
 * **Network Storage:** A NAS or network share accessible via **UNC path** (e.g., `\\192.168.1.50\Astronomy` or `\\MyNAS\Astrophotography`)
 
 ### Storing NAS Credentials (If Password-Protected)
-If your NAS share requires a username and password, save those credentials in **Windows Credential Manager** under the Windows account that runs N.I.N.A.:
+If your NAS share requires a username and password, save those credentials in **Windows Credential Manager** under the Windows account that runs your software:
 1. Open **Control Panel** → **Credential Manager** → **Windows Credentials**.
 2. Click **Add a Windows credential**.
 3. Enter the NAS IP address or hostname (e.g., `192.168.1.50`), along with your NAS username and password.
@@ -108,7 +108,7 @@ Start-ScheduledTask -TaskName "NinaNasOffloader"
 
 ## How Folder Structure Is Preserved
 
-Whatever subfolder hierarchy N.I.N.A. writes inside `$SourceRoot` is mirrored identically to `$DestRoot` (and `$ConflictRoot` if a hash mismatch occurs):
+Whatever subfolder hierarchy your software writes inside `$SourceRoot` is mirrored identically to `$DestRoot` (and `$ConflictRoot` if a hash mismatch occurs):
 
 ```text
 Local N.I.N.A. Path:
