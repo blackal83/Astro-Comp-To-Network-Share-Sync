@@ -5,7 +5,7 @@
 $SourceRoot   = "C:\Users\PrimaLuceLab\Documents\N.I.N.A\sequences"
 $DestRoot     = "\\192.168.4.75\Astrophotography"
 $ConflictRoot = "C:\Users\PrimaLuceLab\Documents\N.I.N.A\sequences_conflicts"
-$LogDir       = "C:\Scripts\NinaOffloader\logs"
+$LogDir       = "C:\Scripts\ImageOffloader\logs"
 
 # Extensions N.I.N.A. outputs (ignores .tmp or incomplete scratch files)
 $AllowedExtensions = @(".fits", ".fit", ".xisf", ".tif", ".tiff")
@@ -198,7 +198,7 @@ function Invoke-FullSweep {
         }
 }
 
-Write-Log "=== NinaOffloader started. Watching $SourceRoot -> $DestRoot ==="
+Write-Log "=== ImageOffloader started. Watching $SourceRoot -> $DestRoot ==="
 
 # 1. Initial sweep on startup for any leftover frames
 Invoke-FullSweep
